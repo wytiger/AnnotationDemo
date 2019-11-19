@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import java.lang.reflect.Field;
 
@@ -14,15 +15,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         findViewById(R.id.tv_test_annotation).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                testAnnotation();
+                testRuntimeAnnotation();
             }
         });
     }
 
-    private void testAnnotation() {
+    private void testRuntimeAnnotation() {
         try {
             Person person = new Person();
             Log.d("testAnnotation", "name = " + person.getName());
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                     String value = myAnnotation.value();
                     Log.d("testAnnotation", "name = " + value);
                     field.setAccessible(true);
-                    //设置值
+                    //设置属性值
                     field.set(person, value);
                 }
             }
